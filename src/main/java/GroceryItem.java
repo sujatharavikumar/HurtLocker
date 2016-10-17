@@ -55,8 +55,8 @@ public class GroceryItem {
 
         for(HashMap.Entry<String,Integer> entry : priceAndNumberOfPriceOccuances.entrySet()){
 
-            stringBuilder.append("Price:\t"+entry.getKey())
-                    .append("\t\tseen: "+entry.getValue().intValue()+" times\n")
+            stringBuilder.append(entry.getKey())
+                    .append("\t\t\tseen: "+entry.getValue()+" times\n")
                     .append("-------------\t\t-------------\n");
         }
 

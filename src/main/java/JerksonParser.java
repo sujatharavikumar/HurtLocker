@@ -42,11 +42,9 @@ public class JerksonParser {
             itemValue = doSpellCheck(itemValue);
 
             if(!checkIfItemExistsInMap(itemValue)){
-                //System.out.println(itemValue);
                 GroceryItem groceryItem = new GroceryItem(itemValue);
                 list.put(itemValue, groceryItem);
                 itemPrice = keyValuePairs[1];
-                //System.out.println(itemPrice);
                 addPriceTGroceryItem(itemValue, itemPrice);
             }
 
@@ -89,8 +87,11 @@ public class JerksonParser {
         }
 */
         //if(itemName != null && price!=null){
-            if(list.get(itemName).checkPriceExists(itemPrice))
+        System.out.println(list.get(itemName).checkPriceExists(itemPrice));
+            if(list.get(itemName).checkPriceExists(itemPrice)) {
                 list.get(itemName).incrementCount(itemPrice);
+                System.out.println("**");
+            }
 
             else
                 list.get(itemName).addPrice(itemPrice);
