@@ -12,12 +12,12 @@ public class JerksonParser {
 
 
     public void parseInput(String input){
-
         String[] itemsArray = splitItems(input);
-
         for (int i=0; i<itemsArray.length; i++){
             String[] currentItem = parseAsKeyValuePairs(itemsArray[i]);
+            //System.out.println(currentItem[0]);
             String currentItemName = addItemToMap(currentItem[0]);
+            //System.out.println(currentItemName);
             addPriceToGroceryItem(currentItemName,currentItem[1]);
         }
     }
@@ -37,11 +37,11 @@ public class JerksonParser {
         }catch (ValueNotFoundException e){
             itemName = null;
         }
+        //System.out.println(itemName);
         if(itemName!=null){
             itemName = doSpellCheck(itemName);
-
+            //System.out.println(itemName);
             if(!checkIfItemExistsInMap(itemName)){
-                //count++;
                 GroceryItem groceryItem = new GroceryItem(itemName);
                 list.put(itemName,groceryItem);
             }

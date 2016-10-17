@@ -18,8 +18,8 @@ public class Main {
         JerksonParser jerksonParser = new JerksonParser();
 
         jerksonParser.parseInput(mainObj.readRawDataToString());
-        jerksonParser.printMap();
-        jerksonParser.printError();
+        //jerksonParser.printMap();
+        //jerksonParser.printError();
         //jerksonParser.printItemsInMap();
     }
 }

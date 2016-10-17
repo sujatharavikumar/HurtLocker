@@ -26,6 +26,50 @@ public class JerksonParserTest {
     }
 
 
+    @Test
+    public void checkForNullValueTest(){
+        JerksonParser jerksonParser = new JerksonParser();
+        String actualOutput = null;
+        try {
+            actualOutput = jerksonParser.checkForNullValue("naMe:Milk");
+        }catch(ValueNotFoundException e){
+
+        }
+        Assert.assertEquals("The value should be Milk","Milk", actualOutput );
+    }
+
+
+    @Test
+    public void checkForNullValueNullTest(){
+        JerksonParser jerksonParser = new JerksonParser();
+        String actualOutput = null;
+        try {
+            actualOutput = jerksonParser.checkForNullValue("naMe:");
+        }catch(ValueNotFoundException e){
+
+        }
+        Assert.assertEquals("The value should be Milk",null, actualOutput );
+    }
+
+
+    @Test
+    public void doSpellCheckTest(){
+        JerksonParser jerksonParser = new JerksonParser();
+        String actualOutput = jerksonParser.doSpellCheck("BrEAD");
+        String expectedOutput = "bread";
+        Assert.assertEquals("The output should be bread", expectedOutput, actualOutput);
+    }
+
+
+    @Test
+    public void checkIfItemExistsInMapTest(){
+        JerksonParser jerksonParser = new JerksonParser();
+        jerksonParser.list.put("milk", new GroceryItem("milk"));
+        boolean actualOutput = jerksonParser.checkIfItemExistsInMap("milk");
+        boolean expectedOutput = true;
+        Assert.assertEquals("The output should be true", expectedOutput, actualOutput);
+
+    }
 
 
 }
