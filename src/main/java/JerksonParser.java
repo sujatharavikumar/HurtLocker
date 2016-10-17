@@ -57,7 +57,12 @@ public class JerksonParser {
 
 
     public void addPriceTGroceryItem(String itemName, String itemPrice){
-        list.get(itemName).addPrice(itemPrice);
+        if(list.get(itemName).checkPriceExists(itemPrice)){
+            list.get(itemName).addPrice(itemPrice);
+        }
+
+        else
+            list.get(itemName).addPrice(itemPrice);
     }
 
 

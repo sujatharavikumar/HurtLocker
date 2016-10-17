@@ -30,4 +30,15 @@ public class GroceryItem {
         priceAndNumberOfPriceOccuances.put(price, 1);
         numberOfItemOccurances++;
     }
+
+
+    public boolean checkPriceExists(String price){
+        return priceAndNumberOfPriceOccuances.containsKey(price);
+    }
+
+    public void incrementCount(String price){
+        priceAndNumberOfPriceOccuances.put(price,new Integer(priceAndNumberOfPriceOccuances.get(price).intValue()+1));
+        numberOfItemOccurances++;
+    }
+
 }
