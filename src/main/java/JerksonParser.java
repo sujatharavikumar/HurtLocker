@@ -17,7 +17,10 @@ public class JerksonParser {
 
         for (int i=0; i<itemsArray.length; i++){
             String[] currentItem = parseAsKeyValuePairs(itemsArray[i]);
+            //System.out.println(currentItem[0]);
+            //System.out.println(currentItem[1]);
             String currentItemName = addItemToMap(currentItem[0]);
+            //System.out.println(currentItemName);
             addPriceToGroceryItem(currentItemName,currentItem[1]);
         }
     }
@@ -25,6 +28,7 @@ public class JerksonParser {
 
 
     public String addItemToMap(String item){
+        //int count = 0;
         String itemName;
         try{
             itemName = checkForNullValue(item);
@@ -36,9 +40,12 @@ public class JerksonParser {
             itemName = doSpellCheck(itemName);
 
             if(!checkIfItemExistsInMap(itemName)){
+                //count++;
                 GroceryItem groceryItem = new GroceryItem(itemName);
                 list.put(itemName,groceryItem);
             }
+            //printMap();
+            //System.out.println(count);
         }
         return itemName;
     }
@@ -83,6 +90,9 @@ public class JerksonParser {
         }
     }
 
+    public void printError(){
+        System.out.println(ValueNotFoundException.formattedErrorOutput());
+    }
 
 
     public String doSpellCheck(String itemName){
@@ -120,6 +130,7 @@ public class JerksonParser {
             else
                 list.get(itemName).addPrice(price);
         }
+        //GroceryItem.printGroceryItemMap();
 
     }
 
@@ -133,7 +144,7 @@ public class JerksonParser {
 
         Matcher noValue = Pattern.compile("^$").matcher(hasValue.group());
         if (noValue.find()){
-            throw new ValueNotFoundException();
+            throw new ValueNotFoundException("Value not found");
         }
         return hasValue.group();
     }

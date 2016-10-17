@@ -7,13 +7,13 @@ import java.util.Map;
 public class GroceryItem {
 
     String name;
-    public int numberOfItemOccurances;
-    public static Map<String, Integer> priceAndNumberOfPriceOccuances = new HashMap<>();
+    public int numberOfItemOccurances = 0;
+    public static Map<String, Integer> priceAndNumberOfPriceOccuances;
 
     public GroceryItem(String name){
         this.name = name;
         priceAndNumberOfPriceOccuances = new HashMap<>();
-        numberOfItemOccurances = 0;
+        //numberOfItemOccurances = 0;
     }
 
     @Override
@@ -32,6 +32,12 @@ public class GroceryItem {
     }
 
 
+    public static void printGroceryItemMap() {
+        for(HashMap.Entry<String,Integer> entry : priceAndNumberOfPriceOccuances.entrySet()){
+            System.out.println(entry.getKey()+": "+entry.getValue());
+        }
+    }
+
     public boolean checkPriceExists(String price){
         return priceAndNumberOfPriceOccuances.containsKey(price);
     }
@@ -39,11 +45,6 @@ public class GroceryItem {
     public void incrementCount(String price){
         priceAndNumberOfPriceOccuances.put(price,priceAndNumberOfPriceOccuances.get(price)+1);
         numberOfItemOccurances++;
-    }
-
-
-    public int getNumberOfOccurence(String price){
-        return priceAndNumberOfPriceOccuances.get(price).intValue();
     }
 
 
