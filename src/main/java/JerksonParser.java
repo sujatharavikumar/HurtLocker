@@ -23,23 +23,29 @@ public class JerksonParser {
     public void parseAsKeyValuePairs(String item){
         String itemValue;
         String[] keyValuePairs = item.split("[^a-zA-Z0-9:./]");
-        //for (String keyValuePair : keyValuePairs){
-            //System.out.println(keyValuePair);
+
         for(int i=0; i<keyValuePairs.length; i=i+4){
-            //System.out.println(keyValuePairs[0]);
             try {
                 itemValue = checkForNullValue(keyValuePairs[0]);
-                //System.out.println(itemValue);
             }
             catch(ValueNotFoundException e){
                 itemValue = null;
             }
-            //if(!checkIfItemExistsInMap(itemValue)){
-                checkSpelling(itemValue);
+
+            if (itemValue != null) {
+                itemValue = checkSpelling(itemValue);
+
+            }
+            if(itemValue != null){
+                itemValue = convertToLowerCase(itemValue);
+
+            }
+            if(!checkIfItemExistsInMap(itemValue)){
+
                 System.out.println(itemValue);
                 GroceryItem groceryItem = new GroceryItem(itemValue);
                 list.put(itemValue, groceryItem);
-            //}
+            }
 
         }
     }
@@ -92,8 +98,14 @@ public class JerksonParser {
 
 
 
-    public String checkSpelling(String itemName){
+    public String convertToLowerCase(String itemName){
         String lowerCaseItem = itemName.toLowerCase();
+        return lowerCaseItem;
+    }
+
+
+    public String checkSpelling(String itemName){
+
         Matcher matcher = Pattern.compile("0",Pattern.CASE_INSENSITIVE).matcher(itemName);
         matcher.find();
         return  matcher.replaceAll("o");
