@@ -37,8 +37,31 @@ public class GroceryItem {
     }
 
     public void incrementCount(String price){
-        priceAndNumberOfPriceOccuances.put(price,new Integer(priceAndNumberOfPriceOccuances.get(price).intValue()+1));
+        priceAndNumberOfPriceOccuances.put(price,priceAndNumberOfPriceOccuances.get(price)+1);
         numberOfItemOccurances++;
     }
+
+
+    public int getNumberOfOccurence(String price){
+        return priceAndNumberOfPriceOccuances.get(price).intValue();
+    }
+
+
+    public String formattedOutput(){
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("name:\t"+name)
+                .append("\t\tseen: "+numberOfItemOccurances+" times\n")
+                .append("=============\t\t=============\n");
+
+        for(HashMap.Entry<String,Integer> entry : priceAndNumberOfPriceOccuances.entrySet()){
+
+            stringBuilder.append("Price:\t"+entry.getKey())
+                    .append("\t\tseen: "+entry.getValue().intValue()+" times\n")
+                    .append("-------------\t\t-------------\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
 
 }
