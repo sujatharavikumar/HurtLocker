@@ -13,22 +13,23 @@ public class JerksonParser {
 
     public void parseInput(String input){
 
-        String[] itemsArray = input.split("##");
+        String[] itemsArray = splitItems(input);
 
         for (int i=0; i<itemsArray.length; i++){
             String[] currentItem = parseAsKeyValuePairs(itemsArray[i]);
-            //System.out.println(currentItem[0]);
-            //System.out.println(currentItem[1]);
             String currentItemName = addItemToMap(currentItem[0]);
-            //System.out.println(currentItemName);
             addPriceToGroceryItem(currentItemName,currentItem[1]);
         }
     }
 
 
 
+    public String[] splitItems(String input){
+        String[] itemsArray = input.split("##");
+        return itemsArray;
+    }
+
     public String addItemToMap(String item){
-        //int count = 0;
         String itemName;
         try{
             itemName = checkForNullValue(item);
@@ -44,8 +45,7 @@ public class JerksonParser {
                 GroceryItem groceryItem = new GroceryItem(itemName);
                 list.put(itemName,groceryItem);
             }
-            //printMap();
-            //System.out.println(count);
+
         }
         return itemName;
     }
@@ -55,33 +55,11 @@ public class JerksonParser {
 
         String[] keyValuePairs = item.split("[^a-zA-Z0-9:./]");
         return keyValuePairs;
-        //getUniqueItems(keyValuePairs);
 
     }
 
 
-    /*public void getUniqueItems(String[] keyValuePairs){
-        String itemValue, itemPrice;
 
-        for(int i=0; i<keyValuePairs.length; i++){
-            try {
-                itemValue = checkForNullValue(keyValuePairs[0]);
-            }
-            catch(ValueNotFoundException e){
-                itemValue = null;
-            }
-
-            itemValue = doSpellCheck(itemValue);
-
-            if(!checkIfItemExistsInMap(itemValue)){
-                GroceryItem groceryItem = new GroceryItem(itemValue);
-                list.put(itemValue, groceryItem);
-                itemPrice = keyValuePairs[1];
-                addPriceToGroceryItem(itemValue, itemPrice);
-            }
-
-        }
-    }*/
 
 
     public void printMap() {
@@ -130,7 +108,6 @@ public class JerksonParser {
             else
                 list.get(itemName).addPrice(price);
         }
-        //GroceryItem.printGroceryItemMap();
 
     }
 
