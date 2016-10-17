@@ -6,6 +6,7 @@ import static java.nio.file.Paths.get;
 
 public class Main {
 
+
     public String readRawDataToString() throws Exception{
         Path path = Paths.get(ClassLoader.getSystemResource("RawData.txt").toURI());
         return new String(readAllBytes(get(path.toUri())));
@@ -13,5 +14,9 @@ public class Main {
 
     public static void main(String[] args) throws Exception{
 
+        Main mainObj = new Main();
+        JerksonParser jerksonParser = new JerksonParser();
+
+        jerksonParser.parseInput(mainObj.readRawDataToString());
     }
 }
