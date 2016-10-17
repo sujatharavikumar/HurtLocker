@@ -7,8 +7,8 @@ import java.util.Map;
 public class GroceryItem {
 
     String name;
-    int numberOfItemOccurances;
-    Map<String, Integer> priceAndNumberOfPriceOccuances = new HashMap<>();
+    public int numberOfItemOccurances;
+    public static Map<String, Integer> priceAndNumberOfPriceOccuances = new HashMap<>();
 
     public GroceryItem(String name){
         this.name = name;
@@ -23,5 +23,11 @@ public class GroceryItem {
                 ", numberOfItemOccurances=" + numberOfItemOccurances +
                 ", priceAndNumberOfPriceOccuances=" + priceAndNumberOfPriceOccuances +
                 '}';
+    }
+
+
+    public void addPrice(String price){
+        priceAndNumberOfPriceOccuances.put(price, 1);
+        numberOfItemOccurances++;
     }
 }

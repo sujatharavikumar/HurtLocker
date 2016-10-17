@@ -22,6 +22,7 @@ public class JerksonParser {
 
     public void parseAsKeyValuePairs(String item){
         String itemValue;
+        String itemPrice;
         String[] keyValuePairs = item.split("[^a-zA-Z0-9:./]");
 
         for(int i=0; i<keyValuePairs.length; i=i+4){
@@ -45,10 +46,20 @@ public class JerksonParser {
                 System.out.println(itemValue);
                 GroceryItem groceryItem = new GroceryItem(itemValue);
                 list.put(itemValue, groceryItem);
+                itemPrice = keyValuePairs[1];
+
+                addPriceTGroceryItem(itemValue, itemPrice);
             }
+
 
         }
     }
+
+
+    public void addPriceTGroceryItem(String itemName, String itemPrice){
+        list.get(itemName).addPrice(itemPrice);
+    }
+
 
 
 
@@ -61,7 +72,6 @@ public class JerksonParser {
         if (noValue.find()){
             throw new ValueNotFoundException();
         }
-        //System.out.println(hasValue.group());
         return hasValue.group();
     }
 
