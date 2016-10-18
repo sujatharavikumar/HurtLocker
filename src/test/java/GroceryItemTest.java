@@ -31,7 +31,18 @@ public class GroceryItemTest {
     }
 
 
-    public void incrementCountTest
+    @Test
+    public void incrementCountTest(){
+        Map<String, Integer> priceAndNumberOfPriceOccuances = new HashMap<>();
+        priceAndNumberOfPriceOccuances.put("3.23", 2);
+        GroceryItem groceryItem = new GroceryItem("milk", priceAndNumberOfPriceOccuances);
+        groceryItem.incrementCount("3.23");
+        int actualOutput = priceAndNumberOfPriceOccuances.get("3.23");
+        int expectedOutput = 3;
+        Assert.assertEquals("The output should be 3", expectedOutput, actualOutput);
+    }
+
+
 
 
 }
