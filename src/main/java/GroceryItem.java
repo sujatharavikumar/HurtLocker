@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 /**
  * Created by sujatharavikumar on 10/17/16.
@@ -39,11 +41,15 @@ public class GroceryItem {
     }
 
     public boolean checkPriceExists(String price){
-        return priceAndNumberOfPriceOccuances.containsKey(price);
+        if(priceAndNumberOfPriceOccuances.containsKey(price))
+            return true;
+        else
+            return false;
+        //return priceAndNumberOfPriceOccuances.keySet().contains(price);
     }
 
     public void incrementCount(String price){
-        priceAndNumberOfPriceOccuances.put(price,priceAndNumberOfPriceOccuances.get(price)+1);
+        priceAndNumberOfPriceOccuances.put(price,(priceAndNumberOfPriceOccuances.get(price))+1);
         numberOfItemOccurances++;
     }
 

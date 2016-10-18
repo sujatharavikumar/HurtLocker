@@ -1,5 +1,4 @@
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -18,8 +17,11 @@ public class JerksonParser {
             //System.out.println(currentItem[0]);
             String currentItemName = addItemToMap(currentItem[0]);
             //System.out.println(currentItemName);
+            System.out.println(currentItemName+" "+currentItem[1]);
             addPriceToGroceryItem(currentItemName,currentItem[1]);
         }
+        printItemsInMap();
+        //GroceryItem.printGroceryItemMap();
     }
 
 
@@ -134,12 +136,12 @@ public class JerksonParser {
 
 
 
-   /* public void printItemsInMap(){
+    public void printItemsInMap(){
         for (Map.Entry<String, GroceryItem> entry : list.entrySet()){
             System.out.println("Key:" +entry.getKey());
             System.out.println("Value:" +entry.getValue());
         }
-    }*/
+    }
 
 
 
@@ -155,7 +157,6 @@ public class JerksonParser {
         matcher.find();
         return  matcher.replaceAll("o");
     }
-
 
 
 }

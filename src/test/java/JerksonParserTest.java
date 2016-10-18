@@ -61,7 +61,7 @@ public class JerksonParserTest {
     }
 
 
-    @Test
+    /*@Test
     public void checkIfItemExistsInMapTest(){
         JerksonParser jerksonParser = new JerksonParser();
         jerksonParser.list.put("milk", new GroceryItem("milk"));
@@ -69,7 +69,11 @@ public class JerksonParserTest {
         boolean expectedOutput = true;
         Assert.assertEquals("The output should be true", expectedOutput, actualOutput);
 
-    }
+    }*/
 
+    public void addItemToMapTest(){
+        JerksonParser jerksonParser = new JerksonParser();
+        //jerksonParser.addItemToMap()
+    }
 
 }

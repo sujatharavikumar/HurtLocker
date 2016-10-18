@@ -20,6 +20,5 @@ public class Main {
         jerksonParser.parseInput(mainObj.readRawDataToString());
         //jerksonParser.printMap();
         //jerksonParser.printError();
-        //jerksonParser.printItemsInMap();
     }
 }
