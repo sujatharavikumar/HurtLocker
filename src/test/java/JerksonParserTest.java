@@ -1,6 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by sujatharavikumar on 10/17/16.
  */
@@ -61,19 +64,27 @@ public class JerksonParserTest {
     }
 
 
-    /*@Test
+    @Test
     public void checkIfItemExistsInMapTest(){
         JerksonParser jerksonParser = new JerksonParser();
-        jerksonParser.list.put("milk", new GroceryItem("milk"));
+        Map<String, Integer> priceAndNumberOfPriceOccuances = new HashMap<>();
+        priceAndNumberOfPriceOccuances.put("3.23", 2);
+        jerksonParser.list.put("milk", new GroceryItem("milk", priceAndNumberOfPriceOccuances));
         boolean actualOutput = jerksonParser.checkIfItemExistsInMap("milk");
         boolean expectedOutput = true;
         Assert.assertEquals("The output should be true", expectedOutput, actualOutput);
-
-    }*/
-
-    public void addItemToMapTest(){
-        JerksonParser jerksonParser = new JerksonParser();
-        //jerksonParser.addItemToMap()
     }
+
+
+    @Test
+    public void convertToLowerCaseTest(){
+        JerksonParser jerksonParser = new JerksonParser();
+        String actualOutput = jerksonParser.convertToLowerCase("MiLk");
+        String expectedOutput = "milk";
+        Assert.assertEquals("The output should be milk", expectedOutput, actualOutput);
+    }
+
+
+
 
 }

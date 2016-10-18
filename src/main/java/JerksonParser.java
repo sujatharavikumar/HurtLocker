@@ -9,21 +9,13 @@ public class JerksonParser {
 
     Map<String, GroceryItem> list = new HashMap<String, GroceryItem>();
 
-
     public void parseInput(String input){
         String[] itemsArray = splitItems(input);
         for (int i=0; i<itemsArray.length; i++){
             String[] currentItem = parseAsKeyValuePairs(itemsArray[i]);
-            //System.out.println(currentItem[0]);
-            String currentItemName = addItemToMap(currentItem[0]);
-            //System.out.println(currentItemName);
-            System.out.println(currentItemName+" "+currentItem[1]);
-            addPriceToGroceryItem(currentItemName,currentItem[1]);
+            addItemToMap(currentItem[0], currentItem[1]);
         }
-        printItemsInMap();
-        //GroceryItem.printGroceryItemMap();
     }
-
 
 
     public String[] splitItems(String input){
@@ -31,26 +23,29 @@ public class JerksonParser {
         return itemsArray;
     }
 
-    public String addItemToMap(String item){
+
+    public void addItemToMap(String item, String itemPrice){
+        Map<String, Integer> priceAndNumberOfPriceOccuances = new HashMap<>();
         String itemName;
+        String price = null;
         try{
             itemName = checkForNullValue(item);
+            price = checkForNullValue(itemPrice);
 
         }catch (ValueNotFoundException e){
             itemName = null;
         }
-        //System.out.println(itemName);
-        if(itemName!=null){
+        if(itemName!=null && price!= null){
             itemName = doSpellCheck(itemName);
-            //System.out.println(itemName);
             if(!checkIfItemExistsInMap(itemName)){
-                GroceryItem groceryItem = new GroceryItem(itemName);
+                priceAndNumberOfPriceOccuances.put(price,0);
+                GroceryItem groceryItem = new GroceryItem(itemName,priceAndNumberOfPriceOccuances);
                 list.put(itemName,groceryItem);
             }
-
         }
-        return itemName;
+        addPriceToGroceryItem(itemName,price);
     }
+
 
 
     public String[] parseAsKeyValuePairs(String item){
@@ -61,14 +56,12 @@ public class JerksonParser {
     }
 
 
-
-
-
     public void printMap() {
         for(HashMap.Entry<String,GroceryItem> entry : list.entrySet()){
             System.out.println(entry.getValue().formattedOutput());
         }
     }
+
 
     public void printError(){
         System.out.println(ValueNotFoundException.formattedErrorOutput());
@@ -91,28 +84,15 @@ public class JerksonParser {
 
 
 
-
     public void addPriceToGroceryItem(String itemName, String itemPrice){
-        String price = null;
-        try{
-            price = checkForNullValue(itemPrice);
-        }
-        catch(ValueNotFoundException e){
-            itemName = null;
-        }
 
-        if(price !=null && itemName != null){
-            if(list.get(itemName).checkPriceExists(price)) {
-                list.get(itemName).incrementCount(price);
-
-            }
-
+        if(itemPrice !=null && itemName != null){
+            if(list.get(itemName).checkPriceExists(itemPrice))
+                list.get(itemName).incrementCount(itemPrice);
             else
-                list.get(itemName).addPrice(price);
+                list.get(itemName).addPrice(itemPrice);
         }
-
     }
-
 
 
 
@@ -132,15 +112,6 @@ public class JerksonParser {
 
     public boolean checkIfItemExistsInMap(String itemName){
         return list.containsKey(itemName);
-    }
-
-
-
-    public void printItemsInMap(){
-        for (Map.Entry<String, GroceryItem> entry : list.entrySet()){
-            System.out.println("Key:" +entry.getKey());
-            System.out.println("Value:" +entry.getValue());
-        }
     }
 
 
